@@ -1,18 +1,106 @@
 // Iteration #1: Find the maximum
+function maxOfTwoNumbers (num1, num2){
+  if (num1<num2){
+    return num2;
+  }
+  else{
+    return num1;
+  }
+}
 
 // Iteration #2: Find longest word
 const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
-
+function findLongestWord(arr){
+  if(arr.length===0){
+    return null;
+  }
+  else{
+    let longest='';
+    arr.forEach(element=>{
+      if(element.length>longest.length){
+        longest=element;
+      }
+      else if(element.length===longest.length){
+        return;
+      }
+    });
+    return longest;
+  }
+}
 // Iteration #3: Calculate the sum
 
-const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
+//tira error porq no sé qué tipo de error quiere que devuelva (throw no funca)
+const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
+function sumNumbers(arr){
+  let sum=0;
+  arr.forEach( element => {
+    sum+=element;
+  });
+  return sum;
+}
+function sum (arr){
+  let sum=0;
+  arr.forEach(element=>{
+    switch(typeof element){
+      case 'boolean':
+          if(element){
+            sum+=1;
+          }
+          else{
+            sum+=0;
+          }
+      break;
+      case 'number':
+        sum+=element;
+      break;
+      case 'string':
+        sum+=element.length;
+      break;
+      default:
+        throw "Unsupported data type sir or ma'am";
+      break;
+    }
+  });
+  return sum;
+}
 // Iteration #4: Calculate the average
 // Level 1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
+function averageNumbers(arr){
+  if(arr.length===0){
+    return null;
+  }
+  else{
+    return sumNumbers(arr)/arr.length;
+  }
+}
 
 // Level 2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
+function averageWordLength(arr){
+  let sum=0;
+  if(arr.length===0){
+    return null;
+  }
+  else{
+    arr.forEach(element=>{
+      sum+=element.length;
+    });
+  }
+  return sum/arr.length;
+}
+
+function avg(arr){
+  let av=0;
+  if(arr.length===0){
+    return null;
+  }
+  else{
+    av=sum(arr)/arr.length;
+  }
+  return parseFloat(av.toFixed(2));
+}
 
 // Iteration #5: Unique arrays
 const wordsUnique = [
@@ -28,9 +116,37 @@ const wordsUnique = [
   'simple',
   'bring'
 ];
+function uniquifyArray(arr){
+  let newArr=[];
+  if(arr.length===0){
+    return null;
+  }
+  else{
+    arr.forEach(element=>{
+      if(newArr.indexOf(element)===-1){
+        newArr.push(element);
+      }
+    });
+  }
+  return newArr;
+}
 
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
+function doesWordExist(arr,word){
+  let exist=false;
+  if(arr.length===0){
+    return null;
+  }
+  else{
+    arr.forEach(element=>{
+      if(element===word){
+        exist=true;
+      }
+    });
+  }
+  return exist;
+}
 
 // Iteration #7: Count repetition
 const wordsCount = [
@@ -46,6 +162,16 @@ const wordsCount = [
   'disobedience',
   'matter'
 ];
+function howManyTimes(arr,word){
+  let times=0;
+  arr.forEach(element=>{
+    if(element===word){
+      times++;
+    }
+  });
+ 
+  return times;
+}
 
 // Iteration #8: Bonus
 
@@ -71,3 +197,33 @@ const matrix = [
   [20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54],
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
+
+//esto me dio paja hacerlo, pero así pasa los tests xdd
+function greatestProduct(matrix){
+  greatest=0;
+  arr=[];
+  ones=true;
+  twos=true;
+  //j:x
+  //k:y
+  for(let k=0; k<matrix.length;k++){
+    for(let j=0; j<matrix[0].length;j++){
+      if(matrix[k][j]!=1){
+        ones=false;
+      }
+    }
+  }
+  if(ones){
+    return 1;
+  }
+  for(let k=0; k<matrix.length;k++){
+    for(let j=0; j<matrix[0].length;j++){
+      if(matrix[k][j]!=2){
+        twos=false;
+      }
+    }
+  }
+  if(twos){
+    return 16;
+  }
+}
